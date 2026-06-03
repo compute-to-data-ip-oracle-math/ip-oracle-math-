@@ -13,8 +13,8 @@ State/Metric]"
 exit 1
 fi
 awk -F',' '{
-split($1, w1, /[ \t\+]+/); if (length(w1) == 0 || length(w1) > 35) { failed=1; exit 1; }
-split($2, w2, /[ \t\+]+/); if (length(w2) == 0 || length(w2) > 7) { failed=1; exit 1; }
+w1_count = split($1, w1, " "); if (w1_count == 0 || w1_count > 35) { failed=1; exit 1; }
+w2_count = split($2, w2, " "); if (w2_count == 0 || w2_count > 7) { failed=1; exit 1; }
 } END { if (failed) exit 1 }' "data/inputs/single-client.txt"
 if [ $? -ne 0 ]; then
 echo "TRANSACTION REJECTED: Input text length bounds exceeded."
